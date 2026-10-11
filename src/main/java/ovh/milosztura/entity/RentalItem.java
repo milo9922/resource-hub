@@ -2,7 +2,7 @@ package ovh.milosztura.entity;
 
 import jakarta.persistence.*;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import ovh.milosztura.util.Status;
+import ovh.milosztura.util.RentalItemStatus;
 import ovh.milosztura.util.Type;
 
 import java.util.List;
@@ -15,13 +15,13 @@ public class RentalItem extends PanacheEntity {
     @Enumerated(EnumType.STRING)
     public Type type;
     @Enumerated(EnumType.STRING)
-    public Status status;
+    public RentalItemStatus status;
 
     public static List<RentalItem> findByType(Type type) {
         return list("type", type);
     }
 
-    public static List<RentalItem> findByStatus(Status status) {
+    public static List<RentalItem> findByStatus(RentalItemStatus status) {
         return list("status", status);
     }
 }

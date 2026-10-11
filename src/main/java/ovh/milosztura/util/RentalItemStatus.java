@@ -1,5 +1,5 @@
 package ovh.milosztura.util;
 
-public enum Status {
+public enum RentalItemStatus {
     AVAILABLE, RENTED
 }
