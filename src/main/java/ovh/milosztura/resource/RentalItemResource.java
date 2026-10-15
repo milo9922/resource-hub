@@ -18,7 +18,7 @@ import ovh.milosztura.service.RentalItemService;
 
 import java.util.List;
 
-@Path("/rental-item")
+@Path("/api/v1/rental-item")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class RentalItemResource {
