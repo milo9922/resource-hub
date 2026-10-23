@@ -1,4 +1,4 @@
-package ovh.milosztura.resource;
+package ovh.milosztura.rest;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.AfterEach;

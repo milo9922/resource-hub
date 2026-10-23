@@ -1,4 +1,4 @@
-package ovh.milosztura.resource;
+package ovh.milosztura.rest;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
