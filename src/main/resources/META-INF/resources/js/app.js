@@ -1,6 +1,7 @@
 const API = {
   resources: "/api/v1/rental-item/all",
   reservations: "/api/v1/reservation/all",
+  health: "/q/health/ready",
   createReservation: "/api/v1/reservation",
   reservationStatus: (id, status) => `/api/v1/reservation/${encodeURIComponent(id)}/${encodeURIComponent(status)}`
 };
@@ -21,7 +22,9 @@ const elements = {
   reservedBy: document.querySelector("#reserved-by"),
   formMessage: document.querySelector("#form-message"),
   submitBooking: document.querySelector("#submit-booking"),
-  toastRegion: document.querySelector("#toast-region")
+  toastRegion: document.querySelector("#toast-region"),
+  healthApplication: document.querySelector("#health-application"),
+  healthDatabase: document.querySelector("#health-database")
 };
 
 const icons = {
@@ -172,18 +175,46 @@ async function loadWorkspace() {
     setError(elements.resourceError, "");
     renderResources();
   } else {
-    setError(elements.resourceError, `Could not load resources. ${results[0].reason.message}`);
-    elements.resourceGrid.innerHTML = '<div class="empty-state"><strong>Resources couldn’t load</strong>Please check your connection and try again.</div>';
+    setError(elements.resourceError, "");
+    elements.resourceGrid.replaceChildren();
   }
   if (results[1].status === "fulfilled") {
     state.reservations = Array.isArray(results[1].value) ? results[1].value : [];
     setError(elements.reservationError, "");
     renderReservations();
   } else {
-    setError(elements.reservationError, `Could not load reservations. ${results[1].reason.message}`);
-    elements.reservationList.innerHTML = '<tr><td class="table-empty" colspan="5">Reservations couldn’t load.</td></tr>';
+    setError(elements.reservationError, "");
+    elements.reservationList.replaceChildren();
   }
   renderStats();
+}
+
+function setHealthStatus(element, status) {
+  const normalized = status === "UP" ? "UP" : "DOWN";
+  element.textContent = normalized;
+  element.closest(".health-row").dataset.status = normalized.toLowerCase();
+}
+
+async function loadHealth() {
+  try {
+    const response = await fetch(API.health, {
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    });
+    const health = await response.json();
+    if (!health || !["UP", "DOWN"].includes(health.status) || !Array.isArray(health.checks)) {
+      throw new Error("Invalid health response");
+    }
+
+    setHealthStatus(elements.healthApplication, health.status);
+    const databaseCheck = health.checks.find(check =>
+      /database|datasource/i.test(check.name || "")
+    );
+    setHealthStatus(elements.healthDatabase, databaseCheck?.status);
+  } catch {
+    setHealthStatus(elements.healthApplication, "DOWN");
+    setHealthStatus(elements.healthDatabase, "DOWN");
+  }
 }
 
 function openBooking(resourceId) {
@@ -313,3 +344,5 @@ elements.startsAt.addEventListener("change", () => {
   }
 });
 void loadWorkspace();
+void loadHealth();
+window.setInterval(() => void loadHealth(), 30_000);

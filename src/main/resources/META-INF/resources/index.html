@@ -52,7 +52,18 @@
         <div class="breadcrumb"><span>Workspace</span><span class="crumb-divider">/</span><strong>Overview</strong></div>
         <div class="topbar-right">
           <span class="today-label" id="today-label"></span>
-          <span class="status-indicator"><span></span> Booking open</span>
+          <div class="health-panel" role="status" aria-label="Application and database status" aria-live="polite">
+            <div class="health-row" data-health="application">
+              <span class="health-dot" aria-hidden="true"></span>
+              <span class="health-label">App</span>
+              <strong class="health-value" id="health-application">DOWN</strong>
+            </div>
+            <div class="health-row" data-health="database">
+              <span class="health-dot" aria-hidden="true"></span>
+              <span class="health-label">Database</span>
+              <strong class="health-value" id="health-database">DOWN</strong>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -62,11 +73,6 @@
             <p class="eyebrow">YOUR SHARED WORKSPACE</p>
             <h1>Good things happen<br class="mobile-break"> when we <span>share.</span></h1>
             <p class="welcome-copy">Find the space or equipment you need. Book it in a few clicks, and get on with your day.</p>
-          </div>
-          <div class="welcome-art" aria-hidden="true">
-            <div class="art-sun"></div><div class="art-window"><i></i><i></i><i></i><i></i></div>
-            <div class="art-plant"><span></span><span></span><span></span><b></b></div>
-            <div class="art-floor"></div>
           </div>
         </section>
 

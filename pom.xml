@@ -85,6 +85,11 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health</artifactId>
+            <version>3.40.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
