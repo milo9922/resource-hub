@@ -30,19 +30,19 @@ The project is intentionally small in scope, but it is designed to follow practi
 | Migrations | Flyway |
 | Validation | Hibernate Validator |
 | Testing | JUnit 5, REST Assured, Testcontainers |
-| Observability | SmallRye Health, Micrometer (Prometheus) |
+| Observability | SmallRye Health |
 | Frontend | Static HTML/JavaScript served by Quarkus |
 | Packaging | Docker (JVM mode, native image optional) |
 
 ## Planned Roadmap
 
-- [ ] Project setup and database schema
-- [ ] Core REST API for resources and reservations
-- [ ] Reservation conflict handling
-- [ ] Profile-based configuration (`dev`, `test`, `prod`)
-- [ ] Simple web interface
-- [ ] Health checks, metrics, and Docker image
-- [ ] Optional: authentication and native image build
+- [x] Project setup and database schema
+- [x] Core REST API for resources and reservations
+- [x] Reservation conflict handling
+- [x] Profile-based configuration (`dev`, `test`, `prod`)
+- [x] Simple web interface
+- [x] Health checks
+- [ ] Docker image
 
 ## Getting Started
 
